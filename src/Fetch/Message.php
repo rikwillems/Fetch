@@ -375,7 +375,9 @@ class Message
     {
         if ($html) {
             if (!isset($this->htmlMessage) && isset($this->plaintextMessage)) {
-                $output = nl2br($this->plaintextMessage);
+				$output = '<p>' . $this->plaintextMessage . '</p>';
+				$output = preg_replace('~\r\n?~', "\n", $output);
+				$output = str_replace("\n\n", '</p><p>', $output);
 
                 return $output;
 
